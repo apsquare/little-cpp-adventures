@@ -1,9 +1,41 @@
-# Compiled binaries produced by g++ / Code Runner
+# Compiled binaries and intermediate files
 build/
 _scratch/
 *.out
 *.exe
 a.out
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.dylib
+*.dll
+*.dSYM/
+*.pdb
 
-# macOS
+# CMake-generated files
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+compile_commands.json
+
+# IDEs and editors
+.vscode/
+.idea/
+*.code-workspace
+*.swp
+*.swo
+*~
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+
+# Operating-system metadata
 .DS_Store
+._*
+Thumbs.db
+Desktop.ini

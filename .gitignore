@@ -1,0 +1,9 @@
+# Compiled binaries produced by g++ / Code Runner
+build/
+_scratch/
+*.out
+*.exe
+a.out
+
+# macOS
+.DS_Store

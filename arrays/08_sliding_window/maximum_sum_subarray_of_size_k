@@ -1,0 +1,39 @@
+#include<iostream>
+
+
+//! Question: Given an integer array arr and an integer k, find the maximum sum among all contiguous subarrays of exactly k elements. Solve it in O(n) time using Sliding Window.
+
+using namespace std;
+
+int main(){
+
+  int n ,k;
+  cin >> n;
+  int arr[n];
+  cin >> k;
+  for(int i=0;i<n;i++){
+    cin >> arr[i];
+  }
+
+  int sum = 0;
+  int left = 0;
+  int right =0 ;
+  int max_sum = INT_MIN; 
+
+  
+
+  while(right < n){
+    sum += arr[right];
+    if(right - left +1 == k){
+      max_sum = max(max_sum, sum);
+      sum -= arr[left];
+      left++;
+    }
+    right++;
+  }
+
+
+  cout  << max_sum << endl;
+
+
+}

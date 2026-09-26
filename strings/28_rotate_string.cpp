@@ -18,7 +18,8 @@ int main(){
 
   string repeated_s = s+s;
 
-  if(repeated_s.find(goal) != string::npos){
+  //? To be a rotation the two strings should have the same length 
+  if(s.length() == goal.length() && repeated_s.find(goal) != string::npos){
     cout << "true" << endl;
   }else{
     cout << "false" << endl;

@@ -1,78 +1,73 @@
-#include <iostream>
-#include <string>
-#include <vector>
+#include<iostream>
+#include<string>
 
+//! Implementing the KMP Algorithm to find a given pattern inside the entered text 
 using namespace std;
 
-//! Problem: Given two strings text and pattern, find the index of the first occurrence of pattern inside text using KMP.
+//* Text    = "ababac"
+//* Pattern = "abac"
+
+//* Pattern Index:  0  1  2  3
+//* Pattern:        a  b  a  c
+//* LPS:            0  0  1  0
 
 int main(){
+   string text , pattern;
+   getline(cin,text);
+   getline(cin,pattern);
 
-    string text, pattern;
+   int n = text.length();
+   int m = pattern.length();
 
-    getline(cin, text);
-    getline(cin, pattern);
+   vector<int> lps;
 
-    int m = pattern.length();
+   int len = 0;
+   int i =1 ;
 
-    // STEP 1: Create LPS array
-    vector<int> lps(m, 0);
-
-    int len = 0;
-    int i = 1;
-
-    while(i < m){
-
-        if(pattern[i] == pattern[len]){
-            len++;
-            lps[i] = len;
+//*    Creating the lps array
+   while(i<m){
+    if(pattern[i] == pattern[len]){
+        len++;
+        lps[i] = len;
+        i++;
+    }else{
+        if(len>0){
+            //*Fall back to the next smaller matching prefix-suffix.
+            len = lps[len-1];
+        }else{
+            lps[i] = 0;
             i++;
         }
-        else{
-
-            if(len > 0){
-                len = lps[len - 1];
-            }
-            else{
-                lps[i] = 0;
-                i++;
-            }
-        }
     }
+   }
 
+    //* Using the lps array to apply KMP algorithm 
+    int i=0;
+    int j =0 ;
 
-    // STEP 2: Use LPS array for KMP search
-
-    i = 0;          // pointer for text
-    int j = 0;      // pointer for pattern
-
-    while(i < text.length()){
-
+    while(i<text.length()){
         if(text[i] == pattern[j]){
             i++;
             j++;
-
-            // Entire pattern matched
-            if(j == m){
-                cout << "Pattern found at index: " << i - j << endl;
-                return 0;
+            if(j==m){
+                //* We have reached the end of the patter so the patten was found
+                cout << "Pattern was found " << endl;
+                return 0; 
             }
-        }
-        else{
+        }else if(j>0){
 
-            // Some characters had already matched
-            if(j > 0){
-                j = lps[j - 1];
-            }
-
-            // Nothing had matched
-            else{
-                i++;
-            }
+//* On mismatch, move j to continue after the last matched part that can be reused as the beginning of the pattern.
+            j = lps[j-1];
+        }else{
+            i++;
         }
     }
 
-    cout << "Pattern not found" << endl;
+    cout << "Pattern was not found " << endl;
+    return 0 ;
 
-    return 0;
+
+
+
+
 }
